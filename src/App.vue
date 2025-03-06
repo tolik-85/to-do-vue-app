@@ -4,36 +4,40 @@ import TaskItem from './components/TaskItem.vue'
 
 export default {
   components: { InputAddTask, TaskItem },
+
   data() {
     return {
       tasks: [],
     }
   },
+
   methods: {
-    pushTask(task) {
+    addTask(task) {
       this.tasks.push(task)
     },
 
     deleteTask(taskId) {
-      this.tasks = this.tasks.filter(task => {
-        return task.taskId != taskId
-      })
+      this.tasks = this.tasks.filter(task => task.id !== taskId)
     },
   },
 }
 </script>
+
 <template>
   <body>
     <div class="container">
+      {{ tasks }}
       <h1>Список задач</h1>
-      <InputAddTask @taskChanged="pushTask($event)" />
+
+      <InputAddTask @taskChanged="addTask($event)" />
+
       <ul id="taskList">
         <TaskItem
-          v-for="(task, idx) of tasks"
-          :key="idx"
-          :task="task.taskText"
-          :id="task.taskId"
+          v-for="task of tasks"
+          :key="task.id"
+          :task="task"
           @task-delete="deleteTask($event)"
+          @ischecked-updated="task.isChecked = $event"
         />
       </ul>
     </div>
@@ -120,7 +124,7 @@ h1 {
   background-color: #c82333;
 }
 #taskList .completed {
-  background-color: #d4edda;
+  background-color: #70ce86;
   text-decoration: none;
   color: #155724;
 }
