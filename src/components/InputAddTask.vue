@@ -43,6 +43,7 @@ export default {
   <div>
     <input
       v-model="taskText"
+      @keyup.enter="addTask"
       type="text"
       id="taskInput"
       placeholder="Введите задачу"

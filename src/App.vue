@@ -16,8 +16,10 @@ export default {
       this.tasks.push(task)
     },
 
-    deleteTask(taskId) {
-      this.tasks = this.tasks.filter(task => task.id !== taskId)
+    deleteTask(taask) {
+      if (taask.isChecked) {
+        this.tasks = this.tasks.filter(task => task.id !== taask.id)
+      }
     },
   },
 }
@@ -26,7 +28,6 @@ export default {
 <template>
   <body>
     <div class="container">
-      {{ tasks }}
       <h1>Список задач</h1>
 
       <InputAddTask @taskChanged="addTask($event)" />

@@ -5,17 +5,12 @@ export default {
   emits: ['taskDelete', 'ischecked-updated'],
 
   data() {
-    return {
-      // checkbox: false,
-    }
+    return {}
   },
 
   methods: {
     deleteTask() {
-      if (this.checkbox) {
-        this.$emit('taskDelete', this.task.id)
-      }
-      // this.checkbox = false
+      this.$emit('taskDelete', this.task)
     },
   },
 }
@@ -27,6 +22,7 @@ export default {
 <template>
   <li v-bind:class="{ completed: task.isChecked }">
     <input
+      v-bind:checked="task.isChecked"
       :checked="task.isChecked"
       @change="$emit('ischecked-updated', $event.target.checked)"
       type="checkbox"
