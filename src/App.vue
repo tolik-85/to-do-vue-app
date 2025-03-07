@@ -16,10 +16,8 @@ export default {
       this.tasks.push(task)
     },
 
-    deleteTask(taask) {
-      if (taask.isChecked) {
-        this.tasks = this.tasks.filter(task => task.id !== taask.id)
-      }
+    deleteTask(id) {
+      this.tasks = this.tasks.filter(task => task.id !== id)
     },
   },
 }
