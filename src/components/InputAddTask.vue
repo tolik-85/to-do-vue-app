@@ -1,39 +1,31 @@
 <script>
-function makeId() {
-  return crypto.randomUUID()
-}
+import isBadWord from '@/functions/isBadWord'
+import makeId from '@/functions/makeId'
 
 export default {
-  emits: ['taskChanged'],
+  props: ['tasks'],
+
+  emits: ['tasks-updated'],
 
   data() {
     return {
       taskText: '',
-      badWords: ['баклажан', 'помидор', 'огурец'],
     }
   },
 
   methods: {
     addTask() {
-      if (this.taskText === '') return
-      if (this.isGoodTask(this.taskText)) {
-        const task = {
-          id: makeId(),
-          text: this.taskText.trim(),
-          isChecked: false,
-        }
-        this.$emit('taskChanged', task)
-      }
-      this.taskText = ''
-    },
+      if (this.taskText === '' || !isBadWord(this.taskText)) return
 
-    isGoodTask(task) {
-      for (const badWord of this.badWords) {
-        if (task.toLowerCase().includes(badWord)) {
-          return false
-        }
+      const task = {
+        id: makeId(),
+        text: this.taskText,
+        isChecked: false,
       }
-      return true
+
+      const updatedTaskd = this.tasks.concat(task)
+      this.$emit('tasks-updated', updatedTaskd)
+      this.taskText = ''
     },
   },
 }
@@ -42,7 +34,7 @@ export default {
 <template>
   <div>
     <input
-      v-model="taskText"
+      v-model.trim="taskText"
       @keyup.enter="addTask"
       type="text"
       id="taskInput"

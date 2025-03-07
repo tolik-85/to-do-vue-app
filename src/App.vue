@@ -12,10 +12,6 @@ export default {
   },
 
   methods: {
-    addTask(task) {
-      this.tasks.push(task)
-    },
-
     deleteTask(id) {
       this.tasks = this.tasks.filter(task => task.id !== id)
     },
@@ -28,7 +24,7 @@ export default {
     <div class="container">
       <h1>Список задач</h1>
 
-      <InputAddTask @taskChanged="addTask($event)" />
+      <InputAddTask :tasks="tasks" @tasks-updated="tasks = $event" />
 
       <ul id="taskList">
         <TaskItem
