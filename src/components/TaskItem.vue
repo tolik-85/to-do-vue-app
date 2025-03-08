@@ -2,27 +2,16 @@
 export default {
   props: ['task', 'tasks'],
 
-  emits: ['tasks-updated'],
-  // 'ischecked-updated',
+  emits: ['tasks-updated', 'task-ischecked-updated'],
 
   methods: {
     deleteTask() {
       if (this.task.isChecked) {
         const updatedTasks = this.tasks.filter(t => t.id !== this.task.id)
         this.$emit('tasks-updated', updatedTasks)
+      } else {
+        alert('Oh no!')
       }
-    },
-
-    checkTask($event) {
-      // console.log($event.target.checked)
-
-      this.tasks.forEach(t => {
-        if (t.id === this.task.id) {
-          t.isChecked = $event.target.checked
-        }
-      })
-
-      // this.$emit('tasks-updated', updatedTasks)
     },
   },
 }
@@ -34,9 +23,8 @@ export default {
       :checked="task.isChecked"
       type="checkbox"
       class="checkbox"
-      @change="checkTask"
+      @change="$emit('task-ischecked-updated', $event.target.checked)"
     />
-    <!-- @change="$emit('ischecked-updated', $event.target.checked)" -->
 
     <span class="task-text">{{ task.text }}</span>
 

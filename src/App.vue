@@ -16,7 +16,8 @@ export default {
 </script>
 
 <template>
-  <body>
+  <div>
+    {{ tasks }}
     <div class="container">
       <h1>Список задач</h1>
 
@@ -27,14 +28,14 @@ export default {
           v-for="task of tasks"
           :key="task.id"
           :task="task"
-          @ischecked-updated="task.isChecked = $event"
           :tasks="tasks"
+          @task-ischecked-updated="task.isChecked = $event"
           @tasks-updated="tasks = $event"
         />
         <!-- @task-delete="deleteTask($event)" -->
       </ul>
     </div>
-  </body>
+  </div>
 </template>
 
 <style>
