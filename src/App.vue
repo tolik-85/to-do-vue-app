@@ -11,11 +11,7 @@ export default {
     }
   },
 
-  methods: {
-    deleteTask(id) {
-      this.tasks = this.tasks.filter(task => task.id !== id)
-    },
-  },
+  methods: {},
 }
 </script>
 
@@ -31,9 +27,11 @@ export default {
           v-for="task of tasks"
           :key="task.id"
           :task="task"
-          @task-delete="deleteTask($event)"
           @ischecked-updated="task.isChecked = $event"
+          :tasks="tasks"
+          @tasks-updated="tasks = $event"
         />
+        <!-- @task-delete="deleteTask($event)" -->
       </ul>
     </div>
   </body>

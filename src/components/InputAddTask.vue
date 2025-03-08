@@ -23,8 +23,8 @@ export default {
         isChecked: false,
       }
 
-      const updatedTaskd = this.tasks.concat(task)
-      this.$emit('tasks-updated', updatedTaskd)
+      const updatedTasks = this.tasks.concat(task)
+      this.$emit('tasks-updated', updatedTasks)
       this.taskText = ''
     },
   },
