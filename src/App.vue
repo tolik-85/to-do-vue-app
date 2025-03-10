@@ -8,6 +8,7 @@ export default {
   data() {
     return {
       tasks: [],
+      hint: '',
     }
   },
 
@@ -17,11 +18,15 @@ export default {
 
 <template>
   <div>
-    {{ tasks }}
+    <!-- {{ tasks }} -->
     <div class="container">
       <h1>Список задач</h1>
 
-      <InputAddTask :tasks="tasks" @tasks-updated="tasks = $event" />
+      <InputAddTask
+        :tasks="tasks"
+        @tasks-updated="tasks = $event"
+        @hint-updated=";(hint = $event), console.log(this.hint)"
+      />
 
       <ul id="taskList">
         <TaskItem
@@ -31,6 +36,8 @@ export default {
           :tasks="tasks"
           @task-ischecked-updated="task.isChecked = $event"
           @tasks-updated="tasks = $event"
+          :hint="hint"
+          @hint-updated=";(hint = $event), console.log(this.hint)"
         />
         <!-- @task-delete="deleteTask($event)" -->
       </ul>
@@ -39,6 +46,10 @@ export default {
 </template>
 
 <style>
+#app {
+  max-width: 400px;
+  width: 100%;
+}
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f4f9;
@@ -54,7 +65,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   text-align: center;
 }
 h1 {
@@ -121,5 +132,8 @@ h1 {
   background-color: #70ce86;
   text-decoration: none;
   color: #155724;
+}
+.hint {
+  width: 100%;
 }
 </style>

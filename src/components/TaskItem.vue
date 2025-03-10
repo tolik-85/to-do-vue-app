@@ -1,8 +1,7 @@
 <script>
 export default {
   props: ['task', 'tasks'],
-
-  emits: ['tasks-updated', 'task-ischecked-updated'],
+  emits: ['tasks-updated', 'task-ischecked-updated', 'hint-updated'],
 
   methods: {
     deleteTask() {
@@ -10,7 +9,8 @@ export default {
         const updatedTasks = this.tasks.filter(t => t.id !== this.task.id)
         this.$emit('tasks-updated', updatedTasks)
       } else {
-        alert('Oh no!')
+        // alert('Oh no!')
+        this.$emit('hint-updated', 'чекни чекбокс')
       }
     },
   },
