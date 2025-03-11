@@ -13,7 +13,7 @@ export default {
         this.$emit('hint-updated', 'чекни чекбокс')
       }
     },
-    toggleCompleted(event) {
+    toggleCompleted() {
       if (this.task.isChecked === true) this.task.isChecked = false
       else this.task.isChecked = true
     },
@@ -32,6 +32,6 @@ export default {
 
     <span class="task-text">{{ task.text }}</span>
 
-    <button @click="deleteTask" class="deleteButton">Удалить</button>
+    <button @click.stop="deleteTask" class="deleteButton">Удалить</button>
   </li>
 </template>

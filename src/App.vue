@@ -13,6 +13,12 @@ export default {
   },
 
   methods: {},
+
+  watch: {
+    hint(newValue) {
+      console.log(newValue)
+    },
+  },
 }
 </script>
 
@@ -23,13 +29,16 @@ export default {
       <h1>Список задач</h1>
 
       <InputAddTask
-        :tasks="tasks"
-        @tasks-updated="tasks = $event"
-        :hint="hint"
-        @hint-updated=";(hint = $event), console.log(this.hint)"
         v-model="hint"
+        :tasks="tasks"
+        :hint="hint"
+        @hint-updated="hint = $event"
+        @tasks-updated="tasks = $event"
       />
-      <!-- не передается без  v-model-->
+
+      <p class="hint">{{ hint }}</p>
+
+      <!-- не передается без v-model-->
       <ul id="taskList">
         <TaskItem
           v-for="task of tasks"
@@ -38,9 +47,7 @@ export default {
           :tasks="tasks"
           @task-ischecked-updated="task.isChecked = $event"
           @tasks-updated="tasks = $event"
-          :hint="hint"
-          @hint-updated=";(hint = $event), console.log(this.hint)"
-          v-model="hint"
+          @hint-updated="hint = $event"
         />
         <!-- не передается через без  v-model-->
         <!-- @task-delete="deleteTask($event)" -->

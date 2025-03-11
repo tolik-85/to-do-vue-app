@@ -3,11 +3,10 @@ import isBadWord from '@/functions/isBadWord'
 import isAlreadyExists from '@/functions/isAlreadyExists'
 import isEmpty from '@/functions/isEmpty'
 import makeId from '@/functions/makeId'
-import { ref, onMounted } from 'vue'
 
 export default {
-  props: ['tasks', 'modelValue', 'hint'],
-  emits: ['tasks-updated', 'update:model-value', 'hint-updated'],
+  props: ['modelValue', 'tasks', 'hint'],
+  emits: ['update:model-value', 'tasks-updated', 'hint-updated'],
 
   data() {
     return {
@@ -27,10 +26,7 @@ export default {
       }
       if (!isBadWord(this.taskText)) {
         // this.$emit('hint-updated', 'не допускается помидор, баклажан, огурец')
-        this.$emit(
-          'update:model-value',
-          'не допускается помидор, баклажан, огурец'
-        )
+        this.$emit('hint-updated', 'не допускается помидор, баклажан, огурец')
         // this.hintText = 'не допускается помидор, баклажан, огурец'
         this.taskText = ''
         return
@@ -54,7 +50,7 @@ export default {
       // this.$emit('hint-updated', '')
       this.$emit('update:model-value', '')
 
-      this.$refs.myinput.focus()
+      this.$refs.inputAddTask.focus()
     },
   },
 }
@@ -63,17 +59,14 @@ export default {
 <template>
   <div>
     <input
-      autofocus
-      ref="myinput"
       v-model.trim="taskText"
-      @keyup.enter="addTask"
-      type="text"
       id="taskInput"
+      ref="inputAddTask"
       placeholder="Введите задачу"
+      autofocus
+      @keyup.enter="addTask"
     />
-    <!-- <p class="hint" :innerText="modelValue"></p> -->
-    <p class="hint" :innerText="hint"></p>
-    <!-- почему не работает hintText -->
+
     <button @click="addTask" id="addTaskButton">Добавить задачу</button>
   </div>
 </template>

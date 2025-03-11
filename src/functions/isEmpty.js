@@ -1,7 +1,6 @@
 function isEmpty(text) {
-  if (text === '') {
-    return true
-  }
+  if (text === '') return true
+  return false
 }
 
 export default isEmpty
