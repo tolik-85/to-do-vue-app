@@ -25,9 +25,11 @@ export default {
       <InputAddTask
         :tasks="tasks"
         @tasks-updated="tasks = $event"
+        :hint="hint"
         @hint-updated=";(hint = $event), console.log(this.hint)"
+        v-model="hint"
       />
-
+      <!-- не передается без  v-model-->
       <ul id="taskList">
         <TaskItem
           v-for="task of tasks"
@@ -38,7 +40,9 @@ export default {
           @tasks-updated="tasks = $event"
           :hint="hint"
           @hint-updated=";(hint = $event), console.log(this.hint)"
+          v-model="hint"
         />
+        <!-- не передается через без  v-model-->
         <!-- @task-delete="deleteTask($event)" -->
       </ul>
     </div>

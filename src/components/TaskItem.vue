@@ -13,12 +13,16 @@ export default {
         this.$emit('hint-updated', 'чекни чекбокс')
       }
     },
+    toggleCompleted(event) {
+      if (this.task.isChecked === true) this.task.isChecked = false
+      else this.task.isChecked = true
+    },
   },
 }
 </script>
 
 <template>
-  <li v-bind:class="{ completed: task.isChecked }">
+  <li v-bind:class="{ completed: task.isChecked }" @click="toggleCompleted">
     <input
       :checked="task.isChecked"
       type="checkbox"
